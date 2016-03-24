@@ -100,9 +100,9 @@ public class JanacLL {
 	 1) traverse to i 
 	 2) swappy swap 
 	*/ 
-	public void swap2(int i, int j){
+	public void swap2(int j){
 		Node current = head;
-		for (int i =0; i<i; i++){
+		for (int i =0; i<j; i++){
 			current= current.next;
 		}
 		
@@ -117,7 +117,6 @@ public class JanacLL {
 	public void swap2(int i, int j){
 		Node elemi;
 		Node elemj; 
-		for (int i =0; i<i; i++){
 
 	}
 	
