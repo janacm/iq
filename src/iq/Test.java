@@ -3,10 +3,12 @@ import java.awt.*;
 import iq.JanacLL;
 public class Test{
 	public static void main (String [] args){
-//		System.out.println("sdfsdf");
-//		String s = new String("sdf");
 //		JanacLL l = new JanacLL();
-		
+		System.out.println("bower" + (4^2)); //this is AND not power!
+		System.out.println("bower" + (1^2));
+
+		int [] arr = {1,2,3,4};
+		System.out.println("cut: ");
 		BinaryTree b = new BinaryTree();
 		b.insert("a");
 		b.insert("b");

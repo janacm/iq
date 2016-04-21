@@ -17,11 +17,14 @@ public class KA {
 	 */
 	
 	public static void main (String [] args){ 
-		String [] s = new String [2]; 
-		s[0] = "{{()}}[]";
-		s[1] = "{[}]";
-		System.out.println(braces(s)[0]);
-		System.out.println(braces(s)[1]);
+		String [] s = new String [5]; 
+		s[0] = "{{()}}[]"; //yes
+		s[1] = "{[}]"; //no
+		s[2] = "{{{{}]"; //no
+		s[3] = "{{{{}}}}"; //yes
+		for (String str : s){
+			System.out.println(bracesOneLine(str));
+		}
 	}
 	static String[] braces(String[] values) {
 		String[] result = new String[values.length];

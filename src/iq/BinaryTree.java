@@ -352,4 +352,6 @@ public class BinaryTree<E extends Comparable<E>> {
         root = null;
         size = 0;
     }
+    
+    // Janac Code starts now
 }
