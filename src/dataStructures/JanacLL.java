@@ -1,4 +1,4 @@
-package iq;
+package dataStructures;
 
 /*
 * Singly Linked list implementation 

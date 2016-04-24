@@ -1,4 +1,4 @@
-package iq;
+package dataStructures;
 import java.io.*;
 import java.util.Iterator;
 
