@@ -1,36 +1,39 @@
 package iq;
 
-import java.io.*;
-import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-
+//public class StringManipulation implements Comparator<StringManipulation>{
 public class StringManipulation {
 
-	public static void main(String[] args) throws Exception {
-
+	public static void main(String[] args) throws Exception { 
+//		System.out.println(Integer.valueOf("-75"));
+		jsonParser();
 		// checkPolygon();
 		// String s = "";
 		// s = "janac";
 		// s = "a";
 		// s = "aaa";
 		// System.out.println(insertCow(s));
-		System.out.println(convert(7792875));
+		// System.out.println(convert(7792875));
 		// regexTest(s);
 	}
 
 	/*
-	 * New base converter strategy!
-	 * Inspired by:  http://introcs.cs.princeton.edu/java/61data/
+	 * New base converter strategy! Inspired by:
+	 * http://introcs.cs.princeton.edu/java/61data/
 	 * 
-	 * 1) divide input by 7,
-	 * 2) collecting remainders Reverse the remainder list Convert each remainder
-	 * 3) to atlassian encoding
+	 * 1) divide input by 7, 2) collecting remainders Reverse the remainder list
+	 * Convert each remainder 3) to atlassian encoding
 	 */
 	static String convert(long input) {
 		ArrayList<Long> remainders = new ArrayList<>();
@@ -192,4 +195,140 @@ public class StringManipulation {
 		return b.insert(0, "COW").toString();
 	}
 
+	/*
+	 * Given this input in a file: 
+	 * Jun 23, 2015 11:00:00 PM org.apache.jsp.index_jsp _jspService
+	 * 
+	 * INFO: {"sq": 0, "vs": 3, "pf": 11, "sn":
+	 * "1965f45398abbf9e995fe9eb18282510", "ht": [{"cn": 1, "ap": 0, "ss": -51,
+	 * "s2": 2601, "s3": -132651, "si": "x524b976cd3bb7071", "sh": -51, "sm":
+	 * "C49A02", "sl": -51, "ot": 1435100360, "ct": 1435100360}]}
+	 * 
+	 * Jun 23, 2015 11:00:00 PM org.apache.jsp.index_jsp _jspService
+	 * 
+	 * 
+	 * INFO: {"sq": 0, "vs": 3, "pf": 11, "sn":
+	 * "1965f45398abbf9e995fe9eb18282510", "ht": [{"cn": 1, "ap": 0, "ss": -75,
+	 * "s2": 5625, "s3": -421875, "si": "x05c96aa3599619ef", "sh": -75, "sm":
+	 * "00C610", "sl": -75, "ot": 1435100398, "ct": 1435100398}]}
+	 * 
+	 * 
+	 * Jun 23, 2015 11:00:00 PM org.apache.jsp.index_jsp _jspService
+	 * 
+	 * INFO: {"sq": 0, "vs": 3, "pf": 11, "sn":
+	 * "1965f45398abbf9e995fe9eb18282510", "ht": [{"cn": 1, "ap": 0, "ss": -85,
+	 * "s2": 7225, "s3": -614125, "si": "x085ed8ad97ec29ab", "sh": -85, "sm":
+	 * "6476BA", "sl": -85, "ot": 1435100340, "ct": 1435100340}]}
+	 * 
+	 * Jun 23, 2015 11:00:00 PM org.apache.jsp.index_jsp _jspService
+	 * 
+	 * INFO: {"sq": 0, "vs": 3, "pf": 11, "sn":
+	 * "1965f45398abbf9e995fe9eb18282510", "ht": [{"cn": 1, "ap": 0, "ss": -71,
+	 * "s2": 5041, "s3": -357911, "si": "x7aff7156cc42d14e", "sh": -71, "sm":
+	 * "0C4885", "sl": -71, "ot": 1435100378, "ct": 1435100378}]}
+	 * 
+	 * Output this:
+	 * 4 (info lines)
+	 * 0 (warns)
+	 * 1 (unique sn)
+	 * 4 (unique si)
+	 * -51 (max ss value)
+	 * closest to 0)
+	 */
+	public static void jsonParser() throws IOException {
+
+		/*
+		 * Enter your code here. Read input from STDIN. Print output to STDOUT
+		 */
+//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		File f= new File("json.txt");
+		BufferedReader br = new BufferedReader(new FileReader(f));
+		String line = "";
+		int info = 0;
+		int warn = 0;
+		int uniqueSn = 1;
+		int uniqueSi = 1;
+		ArrayList<String> sns = new ArrayList<>();
+		ArrayList<String> sis = new ArrayList<>();
+		ArrayList<Integer> ss = new ArrayList<>();
+
+		while ((line = br.readLine()) != null) {
+			if (line.contains("INFO")) {
+				info++;
+				String[] jsonPieces = line.split("\"");
+				for (int i = 0; i < jsonPieces.length; i++) {
+//					System.out.println(jsonPieces.length);
+					if (jsonPieces[i].equals("sn")) {
+						sns.add(jsonPieces[i + 2]);
+					}
+					if (jsonPieces[i].equals("si")) {
+						sis.add(jsonPieces[i + 2]);
+//						System.out.println("jsonPieces: " + jsonPieces[i]);
+					}
+					if (jsonPieces[i].equals("ss")) {
+						String pieceWithSS = jsonPieces[i + 1];
+						int start = pieceWithSS.indexOf(" ");
+						int end = pieceWithSS.indexOf(",");
+						int ssValue= Integer.valueOf(pieceWithSS.substring(start + 1,end));
+//						System.out.println("ss: " + ssValue);
+						ss.add(ssValue);
+					}
+				}
+			} else if (line.contains("WARN")) {
+				warn++;
+				String[] jsonPieces = line.split("\"");
+				for (int i = 0; i < jsonPieces.length; i++) {
+					if (jsonPieces[i].equals("sn")) {
+						sns.add(jsonPieces[i + 2]);
+					}
+					if (jsonPieces[i].equals("si")) {
+						sis.add(jsonPieces[i + 2]);
+					}
+					if (jsonPieces[i].equals("ss")) {
+						ss.add(Integer.valueOf(jsonPieces[i + 2]));
+					}
+				}
+			} else {
+				// date line
+			}
+		}
+		// check for how many uniques si and sns there are by sorting the lists,
+		// and incrementing by one if i != i+1
+		int maxSs = Integer.MIN_VALUE;
+		sns.sort(String::compareTo);
+		sis.sort(String::compareTo);
+		ss.sort(Integer::compareTo);
+		System.out.println(Arrays.toString(sns.toArray()));
+		for (int i = 0; i < sns.size() - 1; i++) {
+			if (!(sns.get(i).equals(sns.get(i + 1))))
+				uniqueSn++;
+		}
+
+		for (int i = 0; i < sis.size() - 1; i++) {
+			if (!(sis.get(i).equals(sis.get(i + 1))))
+				uniqueSi++;
+		}
+
+		for (int i = 0; i < ss.size(); i++) {
+			if (ss.get(i) > maxSs)
+				maxSs = ss.get(i);
+		}
+
+		/*
+//		 * 4 (info lines)
+//		 * 0 (warns)
+//	     * 1 (unique sn)
+//	     * 4 (unique si)
+//	     * -51 (max ss value)
+	 	*/	
+		System.out.println(info);
+		System.out.println(warn);
+		System.out.println(uniqueSn);
+		System.out.println(uniqueSi);
+		System.out.println(maxSs);
+		br.close();
+	}
+	public int compareTo(StringManipulation a, StringManipulation b){
+		return -1;
+	}
 }

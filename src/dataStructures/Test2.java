@@ -14,32 +14,37 @@ import java.util.HashMap;
  * add reverse
  */
 public class Test2 {
-	public static void main(String[] args) {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		String line ="";
-		try{
-			while ( !((line = br.readLine()).equals("")) ){
-				caseStatement(line);
-			}
-		}catch (IOException e){
-			e.printStackTrace();
-		}
+	public static void main(String[] args) throws Exception {
+		// janacStackTest();
+		Node currentNode = new Node("a");
+		currentNode.next = new Node("b");
+		currentNode.next.next = new Node("c");
+		System.out.println("original: " + currentNode.value + currentNode.next.value + currentNode.next.next.value);
+		reverseLinkedList(currentNode);
+		System.out.println("after reverse: " + currentNode.value);
+		System.out.print(currentNode.next.value);
+		System.out.print(currentNode.next.next.value);
+//		janacLLtest();
 	}
 
 	public static void caseStatement(String s) {
-		switch (s) {
-		case "janac":
-			System.out.println("janac received");
-			break;
-		case "bobby":
-			System.out.println("yaaradi bobbin");
-			break;
-		case "cow":
-			System.out.println("MOOOOOOOO");
-			break;
+			// BufferedReader br = new BufferedReader(new
+			// InputStreamReader(System.in));
+			// line ="";
+			// while ( !((line = br.readLine()).equals("")) ){
+			// caseStatement(line);
+			switch (s) {
+			case "janac":
+				System.out.println("janac received");
+				break;
+			case "bobby":
+				System.out.println("yaaradi bobbin");
+				break;
+			case "cow":
+				System.out.println("MOOOOOOOO");
+				break;
+			}
 		}
-	}
-
 	public static void hashMapTest() {
 		HashMap<String, Integer> ages = new HashMap<>();
 		HashMap<String, Integer> ages2 = new HashMap<>();
@@ -63,14 +68,41 @@ public class Test2 {
 		System.out.println(ages2 == ages);
 	}
 
-	public static void janacLLTest() {
+	public static void janacStackTest() {
+		JanacStack j = new JanacStack();
+		j.push("janac");
+		j.push("a");
+		j.push("b");
+		System.out.println(j.pop());
+		System.out.println(j.pop());
+		System.out.println(j.pop());
+	}
+
+	public static Node reverseLinkedList(Node currentNode) {
+		// For first node, previousNode will be null
+		Node previousNode = null;
+		Node nextNode;
+		while (currentNode != null) {
+			nextNode = currentNode.next;
+			// reversing the link
+			currentNode.next = previousNode;
+			// moving currentNode and previousNode by 1 node
+			previousNode = currentNode;
+			currentNode = nextNode;
+		}
+		return previousNode;
+	}
+
+	public static void janacLLtest() {
 		JanacLL l = new JanacLL();
 		l.add("a");
 		l.add("b");
 		l.add("c");
 		System.out.println("Started");
+		System.out.println("original LL: " + l.toString());
+		System.out.println("stack reversed LL: " + l.stackReverse().toString());
 		l.reverse();
-		System.out.println(l.toString());
+		System.out.println("inplace reversed:" + l.toString());
 		// System.out.println(l.get(2));
 	}
 
