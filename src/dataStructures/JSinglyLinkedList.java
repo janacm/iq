@@ -10,7 +10,7 @@ QUESTION
 	- if yes, then modify add() 
 */
 
-public class JanacLL {
+public class JSinglyLinkedList {
 
 	Node head;
 	Node tail;
@@ -69,6 +69,13 @@ public class JanacLL {
 	 * main loop: 
 	 * 3) Assign current.next to previous to reverse the link.
 	 * 4) In each iteration move current and previous by 1 node.
+	 * j=k
+	 * 
+	 *  a>b>c>d
+	 *  p c n
+	 *  a>b>c>d
+	 * 	c p
+	 *    n
 	 * 
 	 */
 	public void reverse() {
@@ -79,12 +86,14 @@ public class JanacLL {
 		while (current.next !=null){
 			previous = current.next;
 			current = current.next;
+			
+//			System.out.println("Current" + current.value);
 		}
 	}
 
-	public JanacLL stackReverse() {
-		JanacLL reversed = new JanacLL();
-		JanacStack j = new JanacStack();
+	public JSinglyLinkedList stackReverse() {
+		JSinglyLinkedList reversed = new JSinglyLinkedList();
+		JStack j = new JStack();
 		Node current = head;
 		while (current != null) {
 			j.push(current.value);
@@ -94,6 +103,17 @@ public class JanacLL {
 			reversed.add(j.pop());
 		}
 		return reversed;
+	}
+
+	public void reverse2() {
+		Node current, next, previous; 
+		current = head.next;
+		previous = head;
+		next = current.next; 
+		
+		while (current.next !=null){
+			previous = current.next;
+		}
 	}
 
 	/*

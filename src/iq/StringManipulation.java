@@ -15,8 +15,8 @@ import java.util.regex.PatternSyntaxException;
 //public class StringManipulation implements Comparator<StringManipulation>{
 public class StringManipulation {
 
-	public static void main(String[] args) throws Exception { 
-//		System.out.println(Integer.valueOf("-75"));
+	public static void main(String[] args) throws Exception {
+		// System.out.println(Integer.valueOf("-75"));
 		jsonParser();
 		// checkPolygon();
 		// String s = "";
@@ -125,15 +125,9 @@ public class StringManipulation {
 			// //checks if the whole input string matches the pattern
 			// System.out.println("replaceAll(X) "+ regex + ": " +
 			// m.replaceAll("X"));
-			System.out.println("start index: " + m.start()); // gives index of
-																// last match.
-																// Must be
-																// called right
-																// after a
-																// successful
-																// match
-																// operation
 
+			// gives index of   last match.   Must be   called right   after a   successful   match   operation 
+			System.out.println("start index: " + m.start());
 		} catch (PatternSyntaxException e) {
 			System.err.println("FARTS");
 			e.getLocalizedMessage();
@@ -196,8 +190,8 @@ public class StringManipulation {
 	}
 
 	/*
-	 * Given this input in a file: 
-	 * Jun 23, 2015 11:00:00 PM org.apache.jsp.index_jsp _jspService
+	 * Given this input in a file: Jun 23, 2015 11:00:00 PM
+	 * org.apache.jsp.index_jsp _jspService
 	 * 
 	 * INFO: {"sq": 0, "vs": 3, "pf": 11, "sn":
 	 * "1965f45398abbf9e995fe9eb18282510", "ht": [{"cn": 1, "ap": 0, "ss": -51,
@@ -227,21 +221,17 @@ public class StringManipulation {
 	 * "s2": 5041, "s3": -357911, "si": "x7aff7156cc42d14e", "sh": -71, "sm":
 	 * "0C4885", "sl": -71, "ot": 1435100378, "ct": 1435100378}]}
 	 * 
-	 * Output this:
-	 * 4 (info lines)
-	 * 0 (warns)
-	 * 1 (unique sn)
-	 * 4 (unique si)
-	 * -51 (max ss value)
-	 * closest to 0)
+	 * Output this: 4 (info lines) 0 (warns) 1 (unique sn) 4 (unique si) -51
+	 * (max ss value) closest to 0)
 	 */
 	public static void jsonParser() throws IOException {
 
 		/*
 		 * Enter your code here. Read input from STDIN. Print output to STDOUT
 		 */
-//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		File f= new File("json.txt");
+		// BufferedReader br = new BufferedReader(new
+		// InputStreamReader(System.in));
+		File f = new File("json.txt");
 		BufferedReader br = new BufferedReader(new FileReader(f));
 		String line = "";
 		int info = 0;
@@ -257,20 +247,20 @@ public class StringManipulation {
 				info++;
 				String[] jsonPieces = line.split("\"");
 				for (int i = 0; i < jsonPieces.length; i++) {
-//					System.out.println(jsonPieces.length);
+					// System.out.println(jsonPieces.length);
 					if (jsonPieces[i].equals("sn")) {
 						sns.add(jsonPieces[i + 2]);
 					}
 					if (jsonPieces[i].equals("si")) {
 						sis.add(jsonPieces[i + 2]);
-//						System.out.println("jsonPieces: " + jsonPieces[i]);
+						// System.out.println("jsonPieces: " + jsonPieces[i]);
 					}
 					if (jsonPieces[i].equals("ss")) {
 						String pieceWithSS = jsonPieces[i + 1];
 						int start = pieceWithSS.indexOf(" ");
 						int end = pieceWithSS.indexOf(",");
-						int ssValue= Integer.valueOf(pieceWithSS.substring(start + 1,end));
-//						System.out.println("ss: " + ssValue);
+						int ssValue = Integer.valueOf(pieceWithSS.substring(start + 1, end));
+						// System.out.println("ss: " + ssValue);
 						ss.add(ssValue);
 					}
 				}
@@ -315,12 +305,9 @@ public class StringManipulation {
 		}
 
 		/*
-//		 * 4 (info lines)
-//		 * 0 (warns)
-//	     * 1 (unique sn)
-//	     * 4 (unique si)
-//	     * -51 (max ss value)
-	 	*/	
+		 * // * 4 (info lines) // * 0 (warns) // * 1 (unique sn) // * 4 (unique
+		 * si) // * -51 (max ss value)
+		 */
 		System.out.println(info);
 		System.out.println(warn);
 		System.out.println(uniqueSn);
@@ -328,7 +315,8 @@ public class StringManipulation {
 		System.out.println(maxSs);
 		br.close();
 	}
-	public int compareTo(StringManipulation a, StringManipulation b){
+
+	public int compareTo(StringManipulation a, StringManipulation b) {
 		return -1;
 	}
 }
