@@ -4,30 +4,24 @@ package dataStructures;
 * Singly Linked list implementation 
 * - stores string values, using a nested node class
 * - references to head and tail 
-
-QUESTION
-- does tail.next wrap around?
-	- if yes, then modify add() 
 */
 
 public class JSinglyLinkedList {
 
-	Node head;
-	Node tail;
+	JNode<String> head;
+	JNode<String> tail;
 	int size = 0;
 
 	/*
-	 * Adds an element to the end of the list if its the first element, then set
-	 * head and tail to be this element else tail.next = new elem, and tail =
-	 * tail.next
+	 * Appends a new element
 	 */
 	public void add(String e) {
 		if (size == 0) {
-			head = new Node(e);
+			head = new JNode<String>(e);
 			tail = head;
 			size = 1;
 		} else {
-			tail.next = new Node(e);
+			tail.next = new JNode<String>(e);
 			tail = tail.next;
 			tail.next = null;
 			size++;
@@ -35,12 +29,26 @@ public class JSinglyLinkedList {
 	}
 
 	/*
-	 * Gets the element at the specified index 1 sets current to head 2 moves to
-	 * next elem "index" number of times 3 ex a-b-c-d get(3) abcd c=a, i=0 abcd
-	 * c=b, i=1 abcd c=c, i=2 abcd c=d, i=3
+	 * Deletes the node at d. Assume list is 0 indexed
+	 */
+	public void delete(int d) {
+		JNode<String> temp = head;
+		if ((head == null) || (d > size - 1)) {
+			return;
+		}
+
+		for (int i = 0; i < d - 1; i++) { // a b c
+			temp = temp.next;
+		}
+		temp.next = temp.next.next;
+		size--;
+	}
+
+	/*
+	 * Gets the element at the specified index
 	 */
 	public String get(int index) {
-		Node current = head;
+		JNode<String> current = head;
 		for (int i = 0; i < index; i++) {
 			current = current.next;
 		}
@@ -48,13 +56,6 @@ public class JSinglyLinkedList {
 	}
 
 	/*
-	 * Reverses the current list input: a-b-c-d: head=a, t=d
-	 * 
-	 * output: d-c-b-a, h=d, t=a
-	 * 
-	 * Idea 1: swap two and repeat on next pair, from beginning to end abcd bacd
-	 * bcad bcda //wrong
-	 * 
 	 * Idea 2: swap two, starting from the end to the beginning (aka: bring the
 	 * last element to the front) abcd abdc adbc dabc dacb dcab dcba //correct
 	 * :)
@@ -64,37 +65,31 @@ public class JSinglyLinkedList {
 	 * 
 	 * Iterative:
 	 * 
-	 * 1) Have three nodes i.e previous,current and next
-	 * 2) When current is head, previous is null
-	 * main loop: 
-	 * 3) Assign current.next to previous to reverse the link.
-	 * 4) In each iteration move current and previous by 1 node.
-	 * j=k
+	 * 1) Have three nodes i.e previous,current and next 2) When current is
+	 * head, previous is null main loop: 3) Assign current.next to previous to
+	 * reverse the link. 4) In each iteration move current and previous by 1
+	 * node. j=k
 	 * 
-	 *  a>b>c>d
-	 *  p c n
-	 *  a>b>c>d
-	 * 	c p
-	 *    n
+	 * a>b>c>d p c n a>b>c>d c p n
 	 * 
 	 */
 	public void reverse() {
-		Node previous, current, next;
+		JNode<String> previous, current, next;
 		current = head;
 		previous = null;
 		next = current.next;
-		while (current.next !=null){
+		while (current.next != null) {
 			previous = current.next;
 			current = current.next;
-			
-//			System.out.println("Current" + current.value);
+
+			// System.out.println("Current" + current.value);
 		}
 	}
 
 	public JSinglyLinkedList stackReverse() {
 		JSinglyLinkedList reversed = new JSinglyLinkedList();
 		JStack j = new JStack();
-		Node current = head;
+		JNode<String> current = head;
 		while (current != null) {
 			j.push(current.value);
 			current = current.next;
@@ -106,12 +101,12 @@ public class JSinglyLinkedList {
 	}
 
 	public void reverse2() {
-		Node current, next, previous; 
+		JNode<String> current, next, previous;
 		current = head.next;
 		previous = head;
-		next = current.next; 
-		
-		while (current.next !=null){
+		next = current.next;
+
+		while (current.next != null) {
 			previous = current.next;
 		}
 	}
@@ -121,7 +116,7 @@ public class JSinglyLinkedList {
 	 * swappy swap
 	 */
 	public void swap2(int j) {
-		Node current = head;
+		JNode<String> current = head;
 		for (int i = 0; i < j; i++) {
 			current = current.next;
 		}
@@ -133,8 +128,8 @@ public class JSinglyLinkedList {
 	 * pointers for i and j 2) set i.next = j.next 3) set j.next = i
 	 */
 	public void swap2(int i, int j) {
-		Node elemi;
-		Node elemj;
+		JNode<String> elemi;
+		JNode elemj;
 
 	}
 
@@ -143,7 +138,7 @@ public class JSinglyLinkedList {
 	 * sample print out: 1->2->3->
 	 */
 	public String toString() {
-		Node current = head;
+		JNode<String> current = head;
 		String s = "";
 
 		while (current != null) {
@@ -151,5 +146,13 @@ public class JSinglyLinkedList {
 			current = current.next;
 		}
 		return s;
+	}
+
+	/*
+	 * Removes duplicates.
+	 */
+	public void removeDuplicates() {
+		if (size < 2)
+			return;
 	}
 }

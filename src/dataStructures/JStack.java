@@ -17,9 +17,6 @@ public class JStack {
 		top++;
 	}
 
-	/*
-	 * Returns the most recently inputted element.
-	 */
 	public String pop() {
 		String s = null;
 		if (top >= 0) {
@@ -28,9 +25,14 @@ public class JStack {
 		}
 		return s;
 	}
-	
-	public boolean isEmpty(){
+
+	public boolean isEmpty() {
 		return top == -1;
+	}
+
+	public int size(){
+		int size = top;
+		return ++size ; 
 	}
 
 }

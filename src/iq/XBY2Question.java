@@ -1,4 +1,4 @@
-package dataStructures;
+package iq;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -1,18 +1,17 @@
 package dataStructures;
 
-import javax.swing.text.StyledEditorKit.ForegroundAction;
+import java.util.ArrayList;
 
-public class JHashMap<K,V> {
-	K key; 
+public class JHashMap<K, V> {
+	K key;
 	V value;
-//	K [] a = new K[4]; 
-	JSinglyLinkedList [] g = new JSinglyLinkedList[34];
+	ArrayList<JSinglyLinkedList> g = new ArrayList<JSinglyLinkedList>();
 
-	public JHashMap(K key, V value){
-			g[i] = new JSinglyLinkedList(); 
+	public JHashMap() {
+		for (int i = 0; i < g.size(); i++) {
+			g.add(i, new JSinglyLinkedList());
 		}
-		for (int i = 0; i < g.length; i++){
+
 	}
-	
-	
+
 }
