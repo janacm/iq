@@ -12,10 +12,14 @@ QUESTION
 
 public class JSinglyLinkedList {
 
-	Node head;
-	Node tail;
+	public Node head;
+	public Node tail;
 	int size = 0;
 
+	
+	public Node head() {
+		return head; 
+	}
 	/*
 	 * Adds an element to the end of the list if its the first element, then set
 	 * head and tail to be this element else tail.next = new elem, and tail =
@@ -34,10 +38,14 @@ public class JSinglyLinkedList {
 		}
 	}
 
+	public int size() {
+		return size;
+	}
+
 	/*
 	 * Gets the element at the specified index 1 sets current to head 2 moves to
-	 * next elem "index" number of times 3 ex a-b-c-d get(3) abcd c=a, i=0 abcd
-	 * c=b, i=1 abcd c=c, i=2 abcd c=d, i=3
+	 * next elem "index" number of times 3 ex a-b-c-d get(3) abcd c=a, i=0 abcd c=b,
+	 * i=1 abcd c=c, i=2 abcd c=d, i=3
 	 */
 	public String get(int index) {
 		Node current = head;
@@ -55,27 +63,19 @@ public class JSinglyLinkedList {
 	 * Idea 1: swap two and repeat on next pair, from beginning to end abcd bacd
 	 * bcad bcda //wrong
 	 * 
-	 * Idea 2: swap two, starting from the end to the beginning (aka: bring the
-	 * last element to the front) abcd abdc adbc dabc dacb dcab dcba //correct
-	 * :)
+	 * Idea 2: swap two, starting from the end to the beginning (aka: bring the last
+	 * element to the front) abcd abdc adbc dabc dacb dcab dcba //correct :)
 	 * 
 	 * soln from
 	 * http://www.java2blog.com/2014/07/how-to-reverse-linked-list-in-java.html
 	 * 
 	 * Iterative:
 	 * 
-	 * 1) Have three nodes i.e previous,current and next
-	 * 2) When current is head, previous is null
-	 * main loop: 
-	 * 3) Assign current.next to previous to reverse the link.
-	 * 4) In each iteration move current and previous by 1 node.
-	 * j=k
+	 * 1) Have three nodes i.e previous,current and next 2) When current is head,
+	 * previous is null main loop: 3) Assign current.next to previous to reverse the
+	 * link. 4) In each iteration move current and previous by 1 node. j=k
 	 * 
-	 *  a>b>c>d
-	 *  p c n
-	 *  a>b>c>d
-	 * 	c p
-	 *    n
+	 * a>b>c>d p c n a>b>c>d c p n
 	 * 
 	 */
 	public void reverse() {
@@ -83,11 +83,11 @@ public class JSinglyLinkedList {
 		current = head;
 		previous = null;
 		next = current.next;
-		while (current.next !=null){
+		while (current.next != null) {
 			previous = current.next;
 			current = current.next;
-			
-//			System.out.println("Current" + current.value);
+
+			// System.out.println("Current" + current.value);
 		}
 	}
 
@@ -105,20 +105,19 @@ public class JSinglyLinkedList {
 		return reversed;
 	}
 
-	public void reverse2() {
-		Node current, next, previous; 
-		current = head.next;
-		previous = head;
-		next = current.next; 
-		
-		while (current.next !=null){
-			previous = current.next;
+	/*
+	 * Delete a node, without being given head or tail
+	 */
+	public void deleteMiddleNode(Node n) {
+		if (n.next != null) {
+			n.value = n.next.value;
+			n.next = n.next.next;
 		}
 	}
 
 	/*
-	 * swap the element at the given index, and index+1 1) traverse to i 2)
-	 * swappy swap
+	 * swap the element at the given index, and index+1 1) traverse to i 2) swappy
+	 * swap
 	 */
 	public void swap2(int j) {
 		Node current = head;
