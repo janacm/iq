@@ -8,10 +8,14 @@ package dataStructures;
 
 public class JSinglyLinkedList {
 
-	JNode<String> head;
-	JNode<String> tail;
+	public JNode<String> head;
+	public JNode<String> tail;
 	int size = 0;
 
+	
+	public Node head() {
+		return head; 
+	}
 	/*
 	 * Appends a new element
 	 */
@@ -26,6 +30,10 @@ public class JSinglyLinkedList {
 			tail.next = null;
 			size++;
 		}
+	}
+
+	public int size() {
+		return size;
 	}
 
 	/*
@@ -56,8 +64,8 @@ public class JSinglyLinkedList {
 	}
 
 	/*
-	 * Idea 2: swap two, starting from the end to the beginning (aka: bring the
-	 * last element to the front) abcd abdc adbc dabc dacb dcab dcba //correct
+	 * Reverses the current list input: a-b-c-d: head=a, t=d
+	 * 
 	 * 
 	 * soln from
 	 * http://www.java2blog.com/2014/07/how-to-reverse-linked-list-in-java.html
@@ -79,6 +87,14 @@ public class JSinglyLinkedList {
 	 * <a b>c>d>
 	 * 
 	 * .p c n
+	 *
+	 * a>b>c>d
+ 	 *
+	 * p c n
+ 	 *
+ 	 * a>b>c>d
+         *
+	 * c p n
 	 * 
 	 * <a<b c>d>
 	 * 
@@ -128,20 +144,19 @@ public class JSinglyLinkedList {
 		return reversed;
 	}
 
-	public void reverse2() {
-		JNode<String> current, next, previous;
-		current = head.next;
-		previous = head;
-		next = current.next;
-
-		while (current.next != null) {
-			previous = current.next;
+	/*
+	 * Delete a node, without being given head or tail
+	 */
+	public void deleteMiddleNode(Node n) {
+		if (n.next != null) {
+			n.value = n.next.value;
+			n.next = n.next.next;
 		}
 	}
 
 	/*
-	 * swap the element at the given index, and index+1 1) traverse to i 2)
-	 * swappy swap
+	 * swap the element at the given index, and index+1 1) traverse to i 2) swappy
+	 * swap
 	 */
 	public void swap2(int j) {
 		JNode<String> current = head;
