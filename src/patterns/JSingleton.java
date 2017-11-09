@@ -1,15 +1,16 @@
 package patterns;
 
 public class JSingleton {
-	JSingleton singleton;
+	public static JSingleton singleton;
 
 	private JSingleton() {
 
 	}
 
-	void create() {
+	public static JSingleton getInstance() {
 		if (singleton != null) {
 			singleton = new JSingleton();
 		}
+		return singleton;
 	}
 }

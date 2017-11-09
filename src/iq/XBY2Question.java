@@ -74,7 +74,7 @@ public class XBY2Question {
 			Object item = dict.get(key);
 			if (item instanceof Hashtable) {
 					System.out.println(indent + key + "=");
-					doSomething(item, depth+1);
+//					doSomething(item, depth+1);
 			}
 			else
 			{

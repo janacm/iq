@@ -58,32 +58,60 @@ public class JSinglyLinkedList {
 	/*
 	 * Idea 2: swap two, starting from the end to the beginning (aka: bring the
 	 * last element to the front) abcd abdc adbc dabc dacb dcab dcba //correct
-	 * :)
 	 * 
 	 * soln from
 	 * http://www.java2blog.com/2014/07/how-to-reverse-linked-list-in-java.html
 	 * 
 	 * Iterative:
 	 * 
-	 * 1) Have three nodes i.e previous,current and next 2) When current is
-	 * head, previous is null main loop: 3) Assign current.next to previous to
-	 * reverse the link. 4) In each iteration move current and previous by 1
-	 * node. j=k
+	 * 1) Have three nodes i.e previous,current and next
 	 * 
-	 * a>b>c>d p c n a>b>c>d c p n
+	 * 2) When current is head, previous is null
 	 * 
+	 * 3) Main loop: Assign current.next to previous to reverse the link.
+	 * 
+	 * 4) In each iteration move current and previous by 1 node. j=k
+	 * 
+	 * ..a>b>c>d>
+	 * 
+	 * p c n
+	 * 
+	 * <a b>c>d>
+	 * 
+	 * .p c n
+	 * 
+	 * <a<b c>d>
+	 * 
+	 * ...p c n
+	 * 
+	 * <a<b<c d>
+	 * 
+	 * .....p c n
+	 * 
+	 * <a<b<c<d
+	 * 
+	 * .......p c n
 	 */
 	public void reverse() {
+		if (size < 2) {
+			return;
+		}
+
 		JNode<String> previous, current, next;
 		current = head;
 		previous = null;
 		next = current.next;
-		while (current.next != null) {
-			previous = current.next;
-			current = current.next;
-
-			// System.out.println("Current" + current.value);
+		while (next != null) {
+			current.next = previous;
+			previous = current;
+			current = next;
+			next = next.next;
 		}
+		current.next = previous;
+		previous = current;
+		current = next;
+		head = previous;
+
 	}
 
 	public JSinglyLinkedList stackReverse() {
