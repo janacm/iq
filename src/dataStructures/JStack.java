@@ -8,17 +8,17 @@ import java.util.ArrayList;
  * Implemented using ArrayList
  * 
  */
-public class JStack {
-	private ArrayList<String> elems = new ArrayList<>();
+public class JStack<E> {
+	private ArrayList<E> elems = new ArrayList<>();
 	private int top = -1;
 
-	public void push(String s) {
-		elems.add(s);
+	public void push(E value) {
+		elems.add(value);
 		top++;
 	}
 
-	public String pop() {
-		String s = null;
+	public E pop() {
+		E s = null;
 		if (top >= 0) {
 			s = elems.get(top);
 			top--;

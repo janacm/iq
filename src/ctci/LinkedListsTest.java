@@ -59,6 +59,7 @@ public class LinkedListsTest {
 		JSinglyLinkedList list = populatedListOfInts();
 		LinkedLists llist = new LinkedLists(); 
 		llist.q24_partition(list, "2");
+		Assert.assertEquals("a->c->d->", llist.toString()); 
 		
 		
 		

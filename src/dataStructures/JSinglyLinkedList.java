@@ -6,26 +6,26 @@ package dataStructures;
 * - references to head and tail 
 */
 
-public class JSinglyLinkedList {
+public class JSinglyLinkedList<E> {
 
-	public JNode<String> head;
-	public JNode<String> tail;
+	public JNode<E> head;
+	public JNode<E> tail;
 	int size = 0;
 
 	
-	public Node head() {
-		return head; 
+	public JNode<E> head() {
+		return this.head; 
 	}
 	/*
 	 * Appends a new element
 	 */
-	public void add(String e) {
+	public void add(E elem) {
 		if (size == 0) {
-			head = new JNode<String>(e);
+			head = new JNode<E>(elem);
 			tail = head;
 			size = 1;
 		} else {
-			tail.next = new JNode<String>(e);
+			tail.next = new JNode<E>(elem);
 			tail = tail.next;
 			tail.next = null;
 			size++;
@@ -40,7 +40,7 @@ public class JSinglyLinkedList {
 	 * Deletes the node at d. Assume list is 0 indexed
 	 */
 	public void delete(int d) {
-		JNode<String> temp = head;
+		JNode<E> temp = head;
 		if ((head == null) || (d > size - 1)) {
 			return;
 		}
@@ -55,8 +55,8 @@ public class JSinglyLinkedList {
 	/*
 	 * Gets the element at the specified index
 	 */
-	public String get(int index) {
-		JNode<String> current = head;
+	public E get(int index) {
+		JNode<E> current = head;
 		for (int i = 0; i < index; i++) {
 			current = current.next;
 		}
@@ -113,7 +113,7 @@ public class JSinglyLinkedList {
 			return;
 		}
 
-		JNode<String> previous, current, next;
+		JNode<E> previous, current, next;
 		current = head;
 		previous = null;
 		next = current.next;
@@ -133,7 +133,7 @@ public class JSinglyLinkedList {
 	public JSinglyLinkedList stackReverse() {
 		JSinglyLinkedList reversed = new JSinglyLinkedList();
 		JStack j = new JStack();
-		JNode<String> current = head;
+		JNode<E> current = head;
 		while (current != null) {
 			j.push(current.value);
 			current = current.next;
@@ -159,7 +159,7 @@ public class JSinglyLinkedList {
 	 * swap
 	 */
 	public void swap2(int j) {
-		JNode<String> current = head;
+		JNode<E> current = head;
 		for (int i = 0; i < j; i++) {
 			current = current.next;
 		}
@@ -171,7 +171,7 @@ public class JSinglyLinkedList {
 	 * pointers for i and j 2) set i.next = j.next 3) set j.next = i
 	 */
 	public void swap2(int i, int j) {
-		JNode<String> elemi;
+		JNode<E> elemi;
 		JNode elemj;
 
 	}
@@ -181,7 +181,7 @@ public class JSinglyLinkedList {
 	 * sample print out: 1->2->3->
 	 */
 	public String toString() {
-		JNode<String> current = head;
+		JNode<E> current = head;
 		String s = "";
 
 		while (current != null) {
