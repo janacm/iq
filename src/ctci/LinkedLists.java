@@ -1,10 +1,8 @@
 package ctci;
 
-import dataStructures.JNode;
 import dataStructures.JSinglyLinkedList;
-import dataStructures.Node;
 
-public class LinkedLists {
+public class LinkedLists{
 
 	/*
 	 * Returns kth last value, given a linked list.
@@ -23,11 +21,11 @@ public class LinkedLists {
 	/*
 	 * Deletes a node which is not head nor tail, given only that nodes value. TODO:
 	 * complete this method after pulling updated get method
-	 */
-	public void q23_DeleteMiddleNode(JSinglyLinkedList<String> list, String s) {
-		JNode<String> n = new JNode<String>(list.get(2));
-
-	}
+	 */ //TODO
+//	public void q23_DeleteMiddleNode(JSinglyLinkedList<String> list, String s) {
+//		JNode<String> n = new JNode<String>(list.get(2));
+//
+//	}
 
 	/*
 	 * Partition an LL into two unsorted groups:
@@ -59,4 +57,5 @@ public class LinkedLists {
 		return partitionedList;
 
 	}
+	
 }

@@ -1,12 +1,14 @@
 package dataStructures;
 
+import patterns.JIterator;
+
 /*
 * Singly Linked list implementation 
 * - stores string values, using a nested node class
 * - references to head and tail 
 */
 
-public class JSinglyLinkedList<E> {
+public class JSinglyLinkedList<E> implements JList<E> {
 
 	public JNode<E> head;
 	public JNode<E> tail;
@@ -130,9 +132,9 @@ public class JSinglyLinkedList<E> {
 
 	}
 
-	public JSinglyLinkedList stackReverse() {
-		JSinglyLinkedList reversed = new JSinglyLinkedList();
-		JStack j = new JStack();
+	public JSinglyLinkedList<E> stackReverse() {
+		JSinglyLinkedList<E> reversed = new JSinglyLinkedList<E>();
+		JStack<E> j = new JStack<E>();
 		JNode<E> current = head;
 		while (current != null) {
 			j.push(current.value);
@@ -170,11 +172,12 @@ public class JSinglyLinkedList<E> {
 	 * given two indices, swap the elements in this linked list 1) traverse two
 	 * pointers for i and j 2) set i.next = j.next 3) set j.next = i
 	 */
-	public void swap2(int i, int j) {
-		JNode<E> elemi;
-		JNode elemj;
-
-	}
+	//TODO
+//	public void swap2(int i, int j) {
+//		JNode<E> elemi;
+//		JNode<E> elemj;
+//
+//	}
 
 	/*
 	 * traverses through the list, until it reaches a null pointer (tail.next)
@@ -197,5 +200,10 @@ public class JSinglyLinkedList<E> {
 	public void removeDuplicates() {
 		if (size < 2)
 			return;
+	}
+
+	@Override
+	public JIterator<E> iterator() {
+		return new JIterator<>(this);
 	}
 }
